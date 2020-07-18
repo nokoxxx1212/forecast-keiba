@@ -1,0 +1,10 @@
+attrdict
+awscli
+boto3
+jupyter
+matplotlib
+numpy
+pandas
+papermill
+pillow
+tqdm
