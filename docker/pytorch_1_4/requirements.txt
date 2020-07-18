@@ -2,8 +2,12 @@ attrdict
 awscli
 boto3
 jupyter
+kedro
+kedro-viz
 matplotlib
+mlflow
 numpy
+opencv-python
 pandas
 papermill
 pillow
