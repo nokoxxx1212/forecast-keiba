@@ -1,9 +1,13 @@
 attrdict
 awscli
 boto3
+bs4
+html5lib
+imblearn
 jupyter
 kedro
 kedro-viz
+lxml
 matplotlib
 mlflow
 numpy

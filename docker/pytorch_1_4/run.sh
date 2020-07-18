@@ -24,6 +24,6 @@ CONTAINER_PORT=8888
 ${DOCKER_CMD} run --name ${CONTAINER_NAME} \
   --privileged \
   --entrypoint bash \
-  -v $(pwd)/../../:/opt/kaggle-titanic/ \
+  -v $(pwd)/../../:/opt/forecast-keiba/ \
   -p ${HOST_PORT}:${CONTAINER_PORT} \
   -it ${CONTAINER_IMAGE}
