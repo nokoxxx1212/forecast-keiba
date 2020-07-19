@@ -7,7 +7,9 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
          curl \
          git \
-         groff-base  
+         gnupg2 \
+         groff-base \
+         unzip \
          vim \
          wget
 
@@ -17,12 +19,14 @@ RUN pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt
 
 # setup selenium
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb  && \
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+COPY google-chrome-stable_current_amd64.deb /workspace/
+RUN dpkg -i --force-depends google-chrome-stable_current_amd64.deb || true && \
     apt update && \
     apt -f install -y && \
-    dpkg -i google-chrome-stable_current_amd64.deb && \
-    apt install python3-selenium -y
+    dpkg -i --force-depends google-chrome-stable_current_amd64.deb && \
+    apt install python3-selenium -y && \
+    apt install libgconf2-4 -y
 
 # cd
 WORKDIR /opt
