@@ -15,4 +15,6 @@ opencv-python
 pandas
 papermill
 pillow
+selenium
+sklearn
 tqdm
