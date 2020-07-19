@@ -33,6 +33,8 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
+from forecast_keiba.pipelines import netkeiba_base_lr
+
 def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
     """Create the project's pipeline.
 
@@ -43,5 +45,9 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
         A mapping from a pipeline name to a ``Pipeline`` object.
 
     """
+    netkeiba_base_lr_pipeline = netkeiba_base_lr.create_pipeline()
 
-    return {"__default__": Pipeline([])}
+    return {
+        "sample_test": netkeiba_base_lr_pipeline,
+        "__default__": netkeiba_base_lr_pipeline
+    }

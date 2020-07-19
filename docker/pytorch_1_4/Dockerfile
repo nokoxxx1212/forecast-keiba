@@ -21,3 +21,6 @@ WORKDIR /opt
 
 # expose port for jupyter notebook 
 EXPOSE 8888
+
+# expose port for kedro viz
+EXPOSE 4141

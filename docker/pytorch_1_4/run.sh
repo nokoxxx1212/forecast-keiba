@@ -17,13 +17,16 @@ DOCKER_CMD=$1
 # constant
 CONTAINER_NAME=forecast-keiba
 CONTAINER_IMAGE=forecast-keiba
-HOST_PORT=28888
-CONTAINER_PORT=8888
+HOST_PORT_IPYNB=28888
+CONTAINER_PORT_IPYNB=8888
+HOST_PORT_KV=24141
+CONTAINER_PORT_KV=4141
 
 # main
 ${DOCKER_CMD} run --name ${CONTAINER_NAME} \
   --privileged \
   --entrypoint bash \
   -v $(pwd)/../../:/opt/forecast-keiba/ \
-  -p ${HOST_PORT}:${CONTAINER_PORT} \
+  -p ${HOST_PORT_IPYNB}:${CONTAINER_PORT_IPYNB} \
+  -p ${HOST_PORT_KV}:${CONTAINER_PORT_KV} \
   -it ${CONTAINER_IMAGE}
