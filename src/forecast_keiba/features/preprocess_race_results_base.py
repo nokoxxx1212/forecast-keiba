@@ -19,7 +19,7 @@ def preprocess_netkeiba_past(race_results_df: pd.DataFrame) -> pd.DataFrame:
     df['rank'] = df['着順'].map(clip_rank)
 
     # test['馬名'].value_counts()などでカウントし、数が多そうなのは落とした後、ダミー変数化
-    df.drop(['着順','馬名'], axis = 1,inplace = True)
+    df.drop(['着順','馬名','騎手'], axis = 1,inplace = True)
     df = pd.get_dummies(df)
 
     return df

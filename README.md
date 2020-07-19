@@ -2,12 +2,16 @@
 
 ## Getting Started for Developer
 ```
+# set google-chrome-stable_current_amd64.deb
+https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+->
+docker/pytorch_1_4/google-chrome-stable_current_amd64.deb
+
 # build container
 $ docker build ./ -t forecast-keiba
 
 # run container
 $ sh run.sh docker
-
 
 # [optional]run container which use gpu(nvidia-docker)
 $ sh run.sh nvidia-docker
@@ -20,6 +24,10 @@ $ jupyter serverextension enable --py jupyter_tabnine
 
 # start jupyter notebook
 $ jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 &
+
+# exec pipeline
+$ kedro run
+
 ```
 
 ## Description
