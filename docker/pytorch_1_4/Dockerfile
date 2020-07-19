@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
          curl \
          git \
-         groff-base \ 
+         groff-base  
          vim \
          wget
 
@@ -15,6 +15,14 @@ RUN apt-get update && \
 COPY requirements.txt /tmp/
 RUN pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt
+
+# setup selenium
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    dpkg -i google-chrome-stable_current_amd64.deb  && \
+    apt update && \
+    apt -f install -y && \
+    dpkg -i google-chrome-stable_current_amd64.deb && \
+    apt install python3-selenium -y
 
 # cd
 WORKDIR /opt
