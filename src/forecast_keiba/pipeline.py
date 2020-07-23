@@ -48,6 +48,6 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
     netkeiba_base_lr_pipeline = netkeiba_base_lr.create_pipeline()
 
     return {
-        "sample_test": netkeiba_base_lr_pipeline,
+        "netkeiba_base_lr": netkeiba_base_lr_pipeline,
         "__default__": netkeiba_base_lr_pipeline
     }

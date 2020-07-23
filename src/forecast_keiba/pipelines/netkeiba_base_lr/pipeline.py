@@ -6,6 +6,7 @@ sys.path.append(FILE_DIR + "/../../")
 from data import scraping_netkeiba
 from features import preprocess_race_results_base
 from models import train_lr
+from models import valid_lr
 from models import predict_lr
 
 def create_pipeline(**kwargs):
@@ -25,6 +26,11 @@ def create_pipeline(**kwargs):
                 func=train_lr.train_lr,
                 inputs=["race_results_df_processed_base"],
                 outputs="model_lr"
+            ),
+            node(
+                func=valid_lr.valid_lr,
+                inputs=["race_results_df_processed_valid", "model_lr"],
+                outputs=None
             ),
             node(
                 func=predict_lr.predict_lr,
