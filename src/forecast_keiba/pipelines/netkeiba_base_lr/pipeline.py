@@ -14,7 +14,7 @@ def create_pipeline(**kwargs):
         [
             node(
                 func=scraping_netkeiba.scraping_netkeiba,
-                inputs=[],
+                inputs=["parameters"],
                 outputs="race_results_df"
             ),
             node(

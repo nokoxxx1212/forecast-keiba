@@ -1,7 +1,7 @@
 import pandas as pd
 import time
 
-def exec_scraping_netkeiba_race_results(race_id_list: list) -> dict:
+def exec_scraping_netkeiba_race_results(race_id_list):
     """
     netkeiba.comのレースIDのリストを渡して、それらをまとめて{'レースID', 結果のDataFrame}という形式の辞書型に格納する
     ex. race_results['201901010101']
@@ -20,7 +20,7 @@ def exec_scraping_netkeiba_race_results(race_id_list: list) -> dict:
     return race_results_dict
 
 
-def scraping_netkeiba():
+def scraping_netkeiba(parameters):
     # race id を生成する（規則的に生成できる）
     # todo: 2019年に絞っている
     race_id_list = []
@@ -35,7 +35,7 @@ def scraping_netkeiba():
 
     # スクレイピング実行
     # todo: listを絞っている
-    race_results_dict = exec_scraping_netkeiba_race_results(race_id_list[0:50])
+    race_results_dict = exec_scraping_netkeiba_race_results(race_id_list[0:parameters["scraping_limit"]])
 
     # 表として見やすいように、dfのindexにrace idを入れる
     for key in race_results_dict.keys():
@@ -47,8 +47,8 @@ def scraping_netkeiba():
     return race_results_df
 
 
-def main():
-    return scraping_netkeiba()
+def main(parameters):
+    return scraping_netkeiba(parameters)
 
 if __name__ == "__main__":
-    main()
+    main(parameters)
