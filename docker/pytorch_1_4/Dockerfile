@@ -36,3 +36,6 @@ EXPOSE 8888
 
 # expose port for kedro viz
 EXPOSE 4141
+
+# expose port for mlflow ui 
+EXPOSE 5000 

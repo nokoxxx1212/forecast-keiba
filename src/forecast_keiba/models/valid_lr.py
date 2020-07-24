@@ -1,7 +1,16 @@
 import pandas as pd
 import random
+import mlflow
+import os
+FILE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def valid_lr(race_results_df_processed_valid, model_lr):
+    # mlflow
+    print('FILE_DIR: ' + FILE_DIR)
+    mlflow.set_tracking_uri(FILE_DIR + '/../../../logs/mlruns/')
+    mlflow.set_experiment('forecast_keiba_valid')
+    mlflow.start_run()
+
     # 検証のデータ準備
     race_results_df_processed_valid = race_results_df_processed_valid
     # 説明変数の取得
@@ -33,7 +42,8 @@ def valid_lr(race_results_df_processed_valid, model_lr):
                         cnt_by_race += 1
         if cnt_by_race == 1:
             correct_count += 1
-    print('acc_exacta_1: ' + str(correct_count/100))
+    acc_exacta_1 = correct_count/100
+    print('acc_exacta_1: ' + str(acc_exacta_1))
 
     # 集計（馬連）
     correct_count = 0
@@ -49,7 +59,8 @@ def valid_lr(race_results_df_processed_valid, model_lr):
                         cnt_by_race += 1
         if cnt_by_race == 2:
             correct_count += 1
-    print('acc_quinella_2: ' + str(correct_count/100))
+    acc_quinella_2 = correct_count/100
+    print('acc_quinella_2: ' + str(acc_quinella_2))
 
     # 集計（三連複）
     correct_count = 0
@@ -65,7 +76,13 @@ def valid_lr(race_results_df_processed_valid, model_lr):
                         cnt_by_race += 1
         if cnt_by_race == 3:
             correct_count += 1
-    print('acc_trio_3: ' + str(correct_count/100))
+    acc_trio_3 = correct_count/100
+    print('acc_trio_3: ' + str(acc_trio_3))
+
+    mlflow.log_metric("acc_exacta_1", acc_exacta_1)
+    mlflow.log_metric("acc_quinella_2", acc_quinella_2)
+    mlflow.log_metric("acc_trio_3", acc_trio_3)
+    mlflow.end_run()
 
 
 def main(race_results_df_processed_valid, model_lr):

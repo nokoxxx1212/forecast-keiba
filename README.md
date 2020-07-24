@@ -1,4 +1,6 @@
 # forecast-keiba
+競馬予想のプロジェクトです。
+Python, Docker, Kedro, MLflowを使っています。
 
 ## Getting Started for Developer
 ```
@@ -28,6 +30,8 @@ $ jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 &
 # exec pipeline
 $ kedro run
 
+# setup mlflow
+$ mlflow ui --host 0.0.0.0 --backend-store-uri logs/mlruns
 ```
 
 ## Description
@@ -48,3 +52,6 @@ Python 3.7.4
 >>> torch.__version__
 '1.4.0'
 ```
+
+## Reference
+* [競馬予想で始めるデータ分析・機械学習](https://www.youtube.com/channel/UCDzwXAWu1zIfJuPTTZyWthw)
