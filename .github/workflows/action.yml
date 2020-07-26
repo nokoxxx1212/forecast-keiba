@@ -6,7 +6,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
     - name: Build Docker image
       run: |
         echo "start build"
