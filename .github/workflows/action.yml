@@ -10,4 +10,4 @@ jobs:
     - name: Build Docker image
       run: |
         echo "start build"
-        docker build . --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
+        docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
