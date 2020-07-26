@@ -2,10 +2,6 @@ import pickle
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
-import mlflow
-
-mlflow.set_tracking_uri('../../../logs/mlruns/')
-mlflow.set_experiment('forecast_keiba')
 
 class ShutubaTable:
     # 出馬表を作る

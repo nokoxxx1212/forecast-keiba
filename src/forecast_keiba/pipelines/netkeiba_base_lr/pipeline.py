@@ -19,17 +19,17 @@ def create_pipeline(**kwargs):
             ),
             node(
                 func=preprocess_race_results_base.preprocess_race_results_base,
-                inputs=["race_results_df"],
+                inputs=["race_results_df", "parameters"],
                 outputs="race_results_df_processed_base"
             ),
             node(
                 func=train_lr.train_lr,
-                inputs=["race_results_df_processed_base"],
+                inputs=["race_results_df_processed_base", "parameters"],
                 outputs="model_lr"
             ),
             node(
                 func=valid_lr.valid_lr,
-                inputs=["race_results_df_processed_valid", "model_lr"],
+                inputs=["race_results_df_processed_valid", "model_lr", "parameters"],
                 outputs=None
             ),
             node(

@@ -1,6 +1,6 @@
 import pandas as pd
 
-def preprocess_netkeiba_past(race_results_df: pd.DataFrame) -> pd.DataFrame:
+def preprocess_netkeiba_past(race_results_df):
     df = race_results_df.copy()
 
     # データ整形
@@ -24,12 +24,12 @@ def preprocess_netkeiba_past(race_results_df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-def preprocess_race_results_base(race_results_df):
+def preprocess_race_results_base(race_results_df, parameters):
     race_results_df_processed_base = preprocess_netkeiba_past(race_results_df)
     return race_results_df_processed_base
 
-def main(race_results_df):
-    return preprocess_race_results_base(race_results_df)
+def main(race_results_df, parameters):
+    return preprocess_race_results_base(race_results_df, parameters)
 
 if __name__ == "__main__":
-    main(race_results_df)
+    main(race_results_df, parameters)

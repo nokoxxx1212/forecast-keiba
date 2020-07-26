@@ -3,13 +3,16 @@ import random
 import mlflow
 import os
 FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+from kedro.config import ConfigLoader
+import requests
+import json
 
-def valid_lr(race_results_df_processed_valid, model_lr):
+def valid_lr(race_results_df_processed_valid, model_lr, parameters):
     # mlflow
     print('FILE_DIR: ' + FILE_DIR)
     mlflow.set_tracking_uri(FILE_DIR + '/../../../logs/mlruns/')
     mlflow.set_experiment('forecast_keiba_valid')
-    mlflow.start_run()
+    run_info = mlflow.start_run()
 
     # 検証のデータ準備
     race_results_df_processed_valid = race_results_df_processed_valid
@@ -82,11 +85,26 @@ def valid_lr(race_results_df_processed_valid, model_lr):
     mlflow.log_metric("acc_exacta_1", acc_exacta_1)
     mlflow.log_metric("acc_quinella_2", acc_quinella_2)
     mlflow.log_metric("acc_trio_3", acc_trio_3)
+
+    # 通知
+    run_result_dict = mlflow.get_run(run_info.info.run_id).to_dictionary()
+    run_result_str = json.dumps(run_result_dict, indent=4)
+
+    conf_paths = [FILE_DIR + "/../../../conf/base", FILE_DIR + "/../../../conf/local"]
+    conf_loader = ConfigLoader(conf_paths)
+    credentials = conf_loader.get("credentials*", "credentials*/**")
+
+    token = credentials['dev_line']['access_token']
+    url = "https://notify-api.line.me/api/notify"
+    headers = {"Authorization": "Bearer " + token}
+    payload = {"message": run_result_str}
+    requests.post(url, headers=headers, data=payload)
+
     mlflow.end_run()
 
 
-def main(race_results_df_processed_valid, model_lr):
-    return valid_lr(race_results_df_processed_valid, model_lr)
+def main(race_results_df_processed_valid, model_lr, parameters):
+    return valid_lr(race_results_df_processed_valid, model_lr, parameters)
 
 if __name__ == "__main__":
-    main(race_results_df_processed_valid, model_lr)
+    main(race_results_df_processed_valid, model_lr, parameters)

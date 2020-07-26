@@ -32,6 +32,14 @@ $ kedro run
 
 # setup mlflow
 $ mlflow ui --host 0.0.0.0 --backend-store-uri logs/mlruns
+
+# set credentials
+$ vim conf/local/credentials.yml
+---
+dev_line:
+  access_token: <line access token>
+---
+
 ```
 
 ## Description

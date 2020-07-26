@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from imblearn.under_sampling import RandomUnderSampler
 import pandas as pd
 
-def train_lr(race_results_df_processed_base):
+def train_lr(race_results_df_processed_base, parameters):
     # 説明変数の取得
     X = race_results_df_processed_base.drop(['rank'],axis=1)
     # 目的変数の取得
@@ -36,8 +36,8 @@ def train_lr(race_results_df_processed_base):
 
     return model_lr
 
-def main(race_results_df_processed_base):
-    return train_lr(race_results_df_processed_base)
+def main(race_results_df_processed_base, parameters):
+    return train_lr(race_results_df_processed_base, parameters)
 
 if __name__ == "__main__":
-    main(race_results_df_processed_base)
+    main(race_results_df_processed_base, parameters)
