@@ -87,18 +87,19 @@ def valid_lr(race_results_df_processed_valid, model_lr, parameters):
     mlflow.log_metric("acc_trio_3", acc_trio_3)
 
     # 通知
-    run_result_dict = mlflow.get_run(run_info.info.run_id).to_dictionary()
-    run_result_str = json.dumps(run_result_dict, indent=4)
+    if parameters['is_notify']:
+        run_result_dict = mlflow.get_run(run_info.info.run_id).to_dictionary()
+        run_result_str = json.dumps(run_result_dict, indent=4)
 
-    conf_paths = [FILE_DIR + "/../../../conf/base", FILE_DIR + "/../../../conf/local"]
-    conf_loader = ConfigLoader(conf_paths)
-    credentials = conf_loader.get("credentials*", "credentials*/**")
+        conf_paths = [FILE_DIR + "/../../../conf/base", FILE_DIR + "/../../../conf/local"]
+        conf_loader = ConfigLoader(conf_paths)
+        credentials = conf_loader.get("credentials*", "credentials*/**")
+        token = credentials['dev_line']['access_token']
 
-    token = credentials['dev_line']['access_token']
-    url = "https://notify-api.line.me/api/notify"
-    headers = {"Authorization": "Bearer " + token}
-    payload = {"message": run_result_str}
-    requests.post(url, headers=headers, data=payload)
+        url = "https://notify-api.line.me/api/notify"
+        headers = {"Authorization": "Bearer " + token}
+        payload = {"message": run_result_str}
+        requests.post(url, headers=headers, data=payload)
 
     mlflow.end_run()
 
