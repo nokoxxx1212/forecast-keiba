@@ -21,6 +21,9 @@ RUN pip install --upgrade pip && \
 # setup selenium
 # RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN ls google-chrome-stable_current_amd64.deb >/dev/null 2>&1 || wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN echo "$(pwd)"
+RUN echo "$(ls)"
+RUN echo "$(find ./ | grep google-chrome-stable_current_amd64)"
 COPY google-chrome-stable_current_amd64.deb /workspace/
 RUN dpkg -i --force-depends google-chrome-stable_current_amd64.deb || true && \
     apt update && \
