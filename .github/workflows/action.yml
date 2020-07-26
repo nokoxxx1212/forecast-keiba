@@ -15,6 +15,6 @@ jobs:
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         cp google-chrome-stable_current_amd64.deb docker/pytorch_1_4/
         echo "$(ls)"
-        cd docker/pytorch_1_4 && docker build --file --tag forecast-keiba:latest . && cd -
+        cd docker/pytorch_1_4 && docker build --tag forecast-keiba:latest . && cd -
         cd docker/pytorch_1_4 && bash run_ci.sh docker && cd -
         echo "end build"
