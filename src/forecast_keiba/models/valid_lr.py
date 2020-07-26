@@ -13,6 +13,7 @@ def valid_lr(race_results_df_processed_valid, model_lr, parameters):
     mlflow.set_tracking_uri(FILE_DIR + '/../../../logs/mlruns/')
     mlflow.set_experiment('forecast_keiba_valid')
     run_info = mlflow.start_run()
+    mlflow.set_tag('model', 'lr')
 
     # 検証のデータ準備
     race_results_df_processed_valid = race_results_df_processed_valid
