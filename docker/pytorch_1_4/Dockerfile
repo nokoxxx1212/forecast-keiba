@@ -20,6 +20,7 @@ RUN pip install --upgrade pip && \
 
 # setup selenium
 # RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN ls google-chrome-stable_current_amd64.deb >/dev/null 2>&1 || wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 COPY google-chrome-stable_current_amd64.deb /workspace/
 RUN dpkg -i --force-depends google-chrome-stable_current_amd64.deb || true && \
     apt update && \
@@ -29,13 +30,16 @@ RUN dpkg -i --force-depends google-chrome-stable_current_amd64.deb || true && \
     apt install libgconf2-4 -y
 
 # cd
-WORKDIR /opt
+WORKDIR /opt/forecast-keiba
 
-# expose port for jupyter notebook 
+# expose port for jupyter notebook
 EXPOSE 8888
 
 # expose port for kedro viz
 EXPOSE 4141
 
-# expose port for mlflow ui 
-EXPOSE 5000 
+# expose port for mlflow ui
+EXPOSE 5000
+
+# exec CMD
+CMD kedro run
