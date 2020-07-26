@@ -10,6 +10,7 @@ jobs:
     - name: Build Docker image
       run: |
         echo "start build"
-        docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
+        echo "$(pwd)"
+        # docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
         cd ./docker/pytorch_1_4 && sh run_ci.sh docker && cd -
         echo "end build"
