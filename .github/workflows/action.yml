@@ -12,6 +12,6 @@ jobs:
         echo "start build"
         echo "$(pwd)"
         echo "$(ls)"
-        # docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
-        cd ./docker/pytorch_1_4 && sh run_ci.sh docker && cd -
+        docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
+        cd ./docker/pytorch_1_4 && bash run_ci.sh docker && cd -
         echo "end build"
