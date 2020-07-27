@@ -10,4 +10,9 @@ jobs:
     - name: Build Docker image
       run: |
         echo "start build"
-        docker build --file ./docker/pytorch_1_4/Dockerfile --tag forecast-keiba:latest ./docker/pytorch_1_4/
+        sudo apt-get install -y wget
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        cp google-chrome-stable_current_amd64.deb docker/pytorch_1_4/
+        cd docker/pytorch_1_4 && docker build --tag forecast-keiba:latest . && cd -
+        cd docker/pytorch_1_4 && bash run_ci.sh docker && cd -
+        echo "end build"
