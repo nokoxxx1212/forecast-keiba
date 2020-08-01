@@ -4,7 +4,7 @@ import os
 FILE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(FILE_DIR + "/../../")
 from data import scraping_netkeiba
-from features import preprocess_race_results_base
+from features import preprocess_race_results
 from models import train_lr
 from models import train_rf
 from models import train_lightgbm
@@ -20,23 +20,23 @@ def create_pipeline(**kwargs):
                 outputs="race_results_df"
             ),
             node(
-                func=preprocess_race_results_base.preprocess_race_results_base,
+                func=preprocess_race_results.preprocess_race_results,
                 inputs=["race_results_df", "parameters"],
-                outputs="race_results_df_processed_base"
+                outputs="race_results_df_processed"
             ),
             node(
                 func=train_lr.train_lr,
-                inputs=["race_results_df_processed_base", "parameters"],
+                inputs=["race_results_df_processed", "parameters"],
                 outputs="model_lr"
             ),
             node(
                 func=train_rf.train_rf,
-                inputs=["race_results_df_processed_base", "parameters"],
+                inputs=["race_results_df_processed", "parameters"],
                 outputs="model_rf"
             ),
             node(
                 func=train_lightgbm.train_lightgbm,
-                inputs=["race_results_df_processed_base", "parameters"],
+                inputs=["race_results_df_processed", "parameters"],
                 outputs="model_lightgbm"
             ),
             node(

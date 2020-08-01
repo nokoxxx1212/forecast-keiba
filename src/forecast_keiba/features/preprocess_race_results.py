@@ -12,7 +12,7 @@ def preprocess_netkeiba_past(race_results_df):
     df['体重変化'] = df['馬体重'].str.split('(',expand = True)[1].str[:-1].astype(int)
     df['単勝'] = df['単勝'].astype(float)
 
-    df.drop(['タイム','着差','調教師','性齢','馬体重'],axis = 1,inplace = True)
+    df.drop(['タイム','着差','調教師','性齢','馬体重', 'horse_id', 'jockey_id']],axis = 1,inplace = True)
 
     # 4位より下はまとめる
     clip_rank = lambda x: x if x < 4 else 4
@@ -24,12 +24,12 @@ def preprocess_netkeiba_past(race_results_df):
 
     return df
 
-def preprocess_race_results_base(race_results_df, parameters):
-    race_results_df_processed_base = preprocess_netkeiba_past(race_results_df)
-    return race_results_df_processed_base
+def preprocess_race_results(race_results_df, parameters):
+    race_results_df_processed = preprocess_netkeiba_past(race_results_df)
+    return race_results_df_processed
 
 def main(race_results_df, parameters):
-    return preprocess_race_results_base(race_results_df, parameters)
+    return preprocess_race_results(race_results_df, parameters)
 
 if __name__ == "__main__":
     main(race_results_df, parameters)
