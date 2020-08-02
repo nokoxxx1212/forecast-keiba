@@ -170,6 +170,7 @@ class HorseResults:
 
 
 def scraping_netkeiba(parameters):
+    print('start scraping_netkeiba')
     race_id_list = []
 
     for place in range(1,11):

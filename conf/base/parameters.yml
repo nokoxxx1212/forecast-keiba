@@ -1,4 +1,5 @@
 scraping_limit: 3
 # scraping_limit: -1
 predict_race_id: '202009040611'
+predict_date: "2020年7月26日"
 is_notify: False

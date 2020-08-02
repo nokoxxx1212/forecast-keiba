@@ -31,6 +31,7 @@ def preprocess_netkeiba_past(race_results_df):
     return df
 
 def preprocess_race_results(race_results_df, parameters):
+    print('start preprocess_race_results')
     race_results_df_processed = preprocess_netkeiba_past(race_results_df)
     return race_results_df_processed
 

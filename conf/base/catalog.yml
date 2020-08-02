@@ -13,9 +13,18 @@ race_results_df_processed:
   filepath: data/processed/race_results_df_processed.pickle
   backend: pickle
 
+race_results_df_predict:
+  type: pickle.PickleDataSet
+  filepath: data/raw/race_results_df_predict.pickle
+  backend: pickle
+
+race_results_df_processed_predict:
+  type: pickle.PickleDataSet
+  filepath: data/processed/race_results_df_processed_predict.pickle
+
 race_results_df_processed_valid:
   type: pickle.PickleDataSet
-  filepath: data/processed/race_results_df_processed_valid_20200722.pickle
+  filepath: data/processed/race_results_df_processed_valid.pickle
   backend: pickle
 
 model_lr:
