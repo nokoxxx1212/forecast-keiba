@@ -3,23 +3,29 @@ import pandas as pd
 def preprocess_netkeiba_past(race_results_df):
     df = race_results_df.copy()
 
+    # 計不があるレース×馬は消去
+    drop_lines = list(df.query('馬体重 == "計不"').index)
+    df.drop(index=drop_lines)
+
     # データ整形
     df = df[~(df['着順'].astype(str).str.contains('\D'))]
     df['着順'] = df['着順'].astype(int)
     df['性'] = df['性齢'].map(lambda x:str(x)[0])
+    df['所属'] = df['調教師'].map(lambda x:str(x)[1])
     df['年齢'] = df['性齢'].map(lambda x:str(x)[1:]).astype(int)
     df['体重'] = df['馬体重'].str.split('(',expand = True)[0].astype(int)
     df['体重変化'] = df['馬体重'].str.split('(',expand = True)[1].str[:-1].astype(int)
+    df['体重変化'] = [int(s) for s in list(df['体重変化'])]
     df['単勝'] = df['単勝'].astype(float)
 
-    df.drop(['タイム','着差','調教師','性齢','馬体重', 'horse_id', 'jockey_id']],axis = 1,inplace = True)
+    df.drop(['タイム','着差','調教師','性齢','馬体重','horse_id','jockey_id'],axis = 1,inplace = True)
 
     # 4位より下はまとめる
     clip_rank = lambda x: x if x < 4 else 4
     df['rank'] = df['着順'].map(clip_rank)
 
     # test['馬名'].value_counts()などでカウントし、数が多そうなのは落とした後、ダミー変数化
-    df.drop(['着順','馬名','騎手'], axis = 1,inplace = True)
+    df.drop(['着順','馬名','騎手','date'], axis = 1,inplace = True)
     df = pd.get_dummies(df)
 
     return df

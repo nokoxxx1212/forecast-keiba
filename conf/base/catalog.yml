@@ -22,3 +22,13 @@ model_lr:
   type: pickle.PickleDataSet
   filepath: data/models/model_lr
   backend: pickle
+
+model_rf:
+  type: pickle.PickleDataSet
+  filepath: data/models/model_rf
+  backend: pickle
+
+model_lightgbm:
+  type: pickle.PickleDataSet
+  filepath: data/models/model_lightgbm
+  backend: pickle

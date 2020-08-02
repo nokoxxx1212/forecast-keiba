@@ -1,4 +1,4 @@
-scraping_limit: 5
+scraping_limit: 3
 # scraping_limit: -1
 predict_race_id: '202009040611'
 is_notify: False
