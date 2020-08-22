@@ -7,7 +7,7 @@ from kedro.config import ConfigLoader
 import requests
 import json
 
-def valid_lr(race_results_df_processed_valid, model_lr, parameters):
+def valid_lightgbm(race_results_df_processed_valid, model_lightgbm, parameters):
     # mlflow
     print('FILE_DIR: ' + FILE_DIR)
     mlflow.set_tracking_uri(FILE_DIR + '/../../../logs/mlruns/')
@@ -23,7 +23,7 @@ def valid_lr(race_results_df_processed_valid, model_lr, parameters):
     y_valid = race_results_df_processed_valid['rank']
 
     # 推論実行
-    y_valid_pred = model_lr.predict(X_valid)
+    y_valid_pred = model_lightgbm.predict(X_valid.values)
 
     # 集計用に処理
     valid_results_df = pd.DataFrame({'pred':y_valid_pred,'actual':y_valid})
@@ -99,14 +99,14 @@ def valid_lr(race_results_df_processed_valid, model_lr, parameters):
 
         url = "https://notify-api.line.me/api/notify"
         headers = {"Authorization": "Bearer " + token}
-        payload = {"message": "model_lr" + run_result_str}
+        payload = {"message": "model_lightgbm" + run_result_str}
         requests.post(url, headers=headers, data=payload)
 
     mlflow.end_run()
 
 
-def main(race_results_df_processed_valid, model_lr, parameters):
-    return valid_lr(race_results_df_processed_valid, model_lr, parameters)
+def main(race_results_df_processed_valid, model_lightgbm, parameters):
+    return valid_lightgbm(race_results_df_processed_valid, model_lightgbm, parameters)
 
 if __name__ == "__main__":
-    main(race_results_df_processed_valid, model_lr, parameters)
+    main(race_results_df_processed_valid, model_lightgbm, parameters)

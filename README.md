@@ -25,7 +25,7 @@ $ jupyter nbextension enable --py jupyter_tabnine
 $ jupyter serverextension enable --py jupyter_tabnine
 
 # start jupyter notebook
-$ jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 &
+$ kedro jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 &
 
 # exec pipeline
 $ kedro run

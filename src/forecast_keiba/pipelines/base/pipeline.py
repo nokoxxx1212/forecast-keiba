@@ -11,6 +11,8 @@ from models import train_lr
 from models import train_rf
 from models import train_lightgbm
 from models import valid_lr
+from models import valid_rf
+from models import valid_lightgbm
 from models import predict_lr
 from models import predict_rf
 from models import predict_lightgbm
@@ -43,11 +45,21 @@ def create_pipeline(**kwargs):
                 inputs=["race_results_df_processed", "parameters"],
                 outputs="model_lightgbm"
             ),
-#            node(
-#                func=valid_lr.valid_lr,
-#                inputs=["race_results_df_processed_valid", "model_lr", "parameters"],
-#                outputs=None
-#            ),
+            node(
+                func=valid_lr.valid_lr,
+                inputs=["race_results_df_processed_valid", "model_lr", "parameters"],
+                outputs=None
+            ),
+            node(
+                func=valid_rf.valid_rf,
+                inputs=["race_results_df_processed_valid", "model_rf", "parameters"],
+                outputs=None
+            ),
+            node(
+                func=valid_lightgbm.valid_lightgbm,
+                inputs=["race_results_df_processed_valid", "model_lightgbm", "parameters"],
+                outputs=None
+            ),
             node(
                 func=scraping_netkeiba_predict.scraping_netkeiba_predict,
                 inputs=["parameters"],
