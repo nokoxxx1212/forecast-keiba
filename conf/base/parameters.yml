@@ -1,5 +1,13 @@
+scrape_year_start: 2019
+scrape_year_end: 2019
 scraping_limit: 3
 # scraping_limit: -1
-predict_race_id: '202009040611'
-predict_date: "2020年7月26日"
+
+train_year_start: 2019
+train_month_start: 1
+train_year_end: 2020
+train_month_end: 9
+
+predict_race_id: ['202009040611']
+predict_date: ["2020年7月26日"]
 is_notify: False

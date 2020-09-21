@@ -19,10 +19,12 @@ $ sh run.sh docker
 $ sh run.sh nvidia-docker
 
 # [optional]install jupyter extensions
-$ pip3 install jupyter-tabnine
-$ jupyter nbextension install --py jupyter_tabnine
-$ jupyter nbextension enable --py jupyter_tabnine
-$ jupyter serverextension enable --py jupyter_tabnine
+---
+pip3 install jupyter-tabnine
+jupyter nbextension install --py jupyter_tabnine
+jupyter nbextension enable --py jupyter_tabnine
+jupyter serverextension enable --py jupyter_tabnine
+---
 
 # start jupyter notebook
 $ kedro jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 &
